@@ -1,17 +1,18 @@
-module DUT(CLK,Reset,A,B,op_code,C_in,Result,C_out,Z_flag);
+module DUT(
     // Input and output signals
-    input logic CLK;
-    input logic Reset;
-    input logic[7:0] A,B;
-    input logic[3:0] op_code;
-    input bit C_in;
-    output logic[15:0] Result;
-    output bit C_out, Z_flag;
-
+    input logic CLK,
+    input logic Reset,
+    input logic[7:0] A,B,
+    input logic[3:0] op_code,
+    input bit C_in,
+    output logic[15:0] Result,
+    output bit C_out, Z_flag
+);
     // Internal signals
     logic[15:0] Temp;
     logic C_out_t, Z_flag_t;
-
+    typedef enum logic [3:0] {ADD=0,SUB=1,MULT=2,DIV=3,ANDD=4,XORR=5  } OP_CODE;
+    OP_CODE operation;
     // ALU logic
     always_ff @(posedge CLK)
     begin 
@@ -23,34 +24,36 @@ module DUT(CLK,Reset,A,B,op_code,C_in,Result,C_out,Z_flag);
         else begin 
             Result= Temp;
             C_out= C_out_t;
-            Z_flag = Z_flag_t;  
+            Z_flag = Z_flag_t; 
+            
         end
     end
-
+    
     always_comb 
     begin 
-        case(op_code) 
-            3'b000: begin 
+        $cast(operation , op_code); 
+        case(operation) 
+            ADD: begin 
                 Temp = A + B +C_in;
                 C_out_t=Temp[8];
             end
-            3'b001: begin 
+            SUB: begin 
                 Temp = A - B;
                 C_out_t=Temp[8];
             end
-            3'b010: begin 
+            MULT: begin 
                 Temp = A * B;
                 C_out_t=0;
             end
-            3'b011: begin 
+            DIV: begin 
                 Temp = A / B;
                 C_out_t=0;
             end
-            3'b100: begin 
+            ANDD: begin 
                 Temp = A & B;
                 C_out_t = 0;
             end
-            3'b101: begin 
+            XORR: begin 
                 Temp = A ^ B;
                 C_out_t=0;
             end
