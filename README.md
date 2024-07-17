@@ -1,6 +1,6 @@
 # ALU_UVM_Based_Testbench #
 ##  UVM Testbench Structure
-<img src="Screenshot 2024-06-29 001400.png" width="700">
+<img src="Img/testbench_structure.png" width="700">
 ## Report summary 
 <img src="Img/waves.png" width="700">
 
