@@ -1,8 +1,8 @@
 
 import uvm_pkg::*;
-
 `include "ALU_interface.sv"
 
+`include "uvm_macros.svh"
 import ALU_pkg::*;
 
 module Top;
@@ -25,12 +25,12 @@ always begin
     #5 CLK = ~CLK;
 end
 
-initial begin
+// initial begin
 
-#500000
-$finish;
+// #500000
+// $finish;
 
-end
+// end
 initial begin
 /*static function void uvm_config_db#(type T)::set(
     uvm_component cntxt,

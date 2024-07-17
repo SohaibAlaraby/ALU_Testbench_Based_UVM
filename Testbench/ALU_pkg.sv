@@ -2,7 +2,6 @@ package ALU_pkg;
     import uvm_pkg::*;
     
     `include "uvm_macros.svh"
-
     `include "ALU_Sequence_Item.sv"
     `include "ALU_Sequence.sv"
     `include "ALU_Sequencer.sv"

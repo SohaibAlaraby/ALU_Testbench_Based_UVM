@@ -20,6 +20,12 @@ function void connect_phase(uvm_phase phase);
     `uvm_info(get_type_name(),"in ALU_Test connect phase",UVM_LOW)
 endfunction:connect_phase
 
+function void end_of_elaboration_phase(uvm_phase phase);
+    super.end_of_elaboration_phase(phase);
+    `uvm_info(get_type_name(),"in ALU_Test end_of_elaboration_phase",UVM_LOW)
+    this.print();
+    factory.print();
+endfunction:end_of_elaboration_phase
 task run_phase(uvm_phase phase);
 
     super.run_phase(phase);
@@ -51,7 +57,7 @@ task run_phase(uvm_phase phase);
     This context-awareness can be beneficial in complex testbenches.
     
     */
-    repeat(10000) begin
+    repeat(80000) begin
         #20
         tst_seq= test_sequence::type_id::create("tst_seq");
         tst_seq.start(env.alu_agt.alu_sequencer);

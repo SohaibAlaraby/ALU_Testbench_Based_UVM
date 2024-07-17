@@ -3,12 +3,6 @@ class ALU_Coverage_Collector extends uvm_subscriber #(ALU_Sequence_Item);
 
 
 ALU_Sequence_Item item;
-/*input   logic       Reset;
-input   logic[7:0]  A,B;
-input   logic[3:0]  op_code;
-input   bit         C_in;
-output  logic[15:0] Result;
-output  bit         C_out, Z_flag;*/
 uvm_analysis_imp #(ALU_Sequence_Item,ALU_Coverage_Collector) analysis_export;
 covergroup ALU_cg;
     option.per_instance=1;
@@ -32,6 +26,30 @@ covergroup ALU_cg;
         bins xoring = {4'b 0101};
     }
     C_in:coverpoint item.C_in;
+
+    corner_cases: cross A,B,op_code {
+        //ADD
+        bins Add_cross1 = binsof(A.All_Ones) && binsof(B.All_Ones) && binsof(op_code.add);
+        bins Add_cross2 = binsof(A.All_Zeros) && binsof(B.All_Zeros) && binsof(op_code.add);
+        //SUB
+        bins Sub_cross1 = binsof(A.All_Ones) && binsof(B.All_Ones) && binsof(op_code.sub);
+        bins Sub_cross2 = binsof(A.All_Zeros) && binsof(B.All_Zeros) && binsof(op_code.sub);
+        //MUL
+        bins Mul_cross1 = binsof(A.All_Ones) && binsof(B.All_Ones) && binsof(op_code.mul);
+        bins Mul_cross2 = binsof(A.All_Zeros) && binsof(B.All_Zeros) && binsof(op_code.mul);
+        //DIV
+        bins Div_cross1 = binsof(A.All_Ones) && binsof(B.All_Ones) && binsof(op_code.div);
+        bins Div_cross2 = binsof(A.All_Zeros) && binsof(B.All_Zeros) && binsof(op_code.div);
+        //AND
+        bins And_cross1 = binsof(A.All_Ones) && binsof(B.All_Ones) && binsof(op_code.anding);
+        bins And_cross2 = binsof(A.All_Zeros) && binsof(B.All_Zeros) && binsof(op_code.anding);
+        //XOR
+        bins Xor_cross1 = binsof(A.All_Ones) && binsof(B.All_Ones) && binsof(op_code.xoring);
+        bins Xor_cross2 = binsof(A.All_Zeros) && binsof(B.All_Zeros) && binsof(op_code.xoring);
+
+
+    }
+
 endgroup:ALU_cg
 function new(string name="ALU_Coverage_Collector" , uvm_component parent = null);
     super.new(name,parent);

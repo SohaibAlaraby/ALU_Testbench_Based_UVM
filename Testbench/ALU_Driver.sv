@@ -21,7 +21,7 @@ function void connect_phase(uvm_phase phase);
 endfunction
 
 task run_phase(uvm_phase phase);
-    super.build_phase(phase);
+    super.run_phase(phase);
     `uvm_info(get_type_name(),"in ALU_Driver constructor", UVM_LOW)
     forever begin
         item = ALU_Sequence_Item::type_id::create("item");
