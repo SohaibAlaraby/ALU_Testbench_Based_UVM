@@ -17,3 +17,5 @@
 ##  Coverage Results
 
 <img src="Img/cov1.png" width="1000">
+<img src="Img/cov2.png" width="1000">
+<img src="Img/cov3.png" width="1000">
