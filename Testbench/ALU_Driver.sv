@@ -40,10 +40,4 @@ task drive(ALU_Sequence_Item item);
     intf.C_in       <= item.C_in;
 
 endtask
-/*input   logic       Reset;
-input   logic[7:0]  A,B;
-input   logic[3:0]  op_code;
-input   bit         C_in;
-output  logic[15:0] Result;
-output  bit         C_out, Z_flag;*/
 endclass:ALU_Driver
